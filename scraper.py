@@ -11,8 +11,18 @@ TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN')
 CHAT_ID = os.environ.get('CHAT_ID')
 
 def send_telegram_message(message):
-    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    requests.post(url, data={'chat_id': CHAT_ID, 'text': message})
+    try:
+        url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+        response = requests.post(url, data={'chat_id': CHAT_ID, 'text': message}, timeout=10)
+        
+        # 텔레그램 서버의 반송 사유를 로그에 출력하는 진단 코드
+        print("=== 텔레그램 통신 결과 ===")
+        print(f"응답 코드: {response.status_code}")
+        print(f"상세 내용: {response.text}")
+        print("==========================")
+        
+    except Exception as e:
+        print(f"텔레그램 통신 자체 실패: {e}")
 
 def check_megabox_event():
     # 클라우드 백그라운드 환경(Headless)에 맞춘 크롬 설정
@@ -52,4 +62,4 @@ def check_megabox_event():
 
 if __name__ == "__main__":
     check_megabox_event()
-    send_telegram_message("✅ [시스템 보고] 메가박스 감시 스크립트가 1회 정상적으로 실행되었습니다.")
+    send_telegram_message("✅ [시스템 보고] 메가박스 감시 스크립트가 실행되었습니다.")
