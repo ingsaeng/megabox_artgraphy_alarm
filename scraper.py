@@ -44,3 +44,4 @@ def check_megabox_event():
 
 if __name__ == "__main__":
     check_megabox_event()
+    send_telegram_message("✅ [시스템 보고] 메가박스 감시 스크립트가 1회 정상적으로 실행되었습니다.")
