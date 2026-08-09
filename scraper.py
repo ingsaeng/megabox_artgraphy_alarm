@@ -42,7 +42,7 @@ def check_megabox_event():
     # -------------------------------------------------------------------
     
     try:
-        url = 'https://www.megabox.co.kr/event'
+        url = 'https://www.megabox.co.kr/event/megabox'
         driver.get(url)
         time.sleep(5) # 페이지 렌더링 대기
         
