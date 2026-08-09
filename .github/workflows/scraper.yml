@@ -2,7 +2,7 @@ name: Megabox Event Scraper
 
 on:
   schedule:
-    - cron: '*/15 * * * *' # 매 15분마다 실행
+    - cron: '*/5 * * * *' # 매 15분마다 실행
   workflow_dispatch: # 수동 테스트용 버튼 활성화
 
 jobs:
