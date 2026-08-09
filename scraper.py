@@ -21,7 +21,15 @@ def check_megabox_event():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     
+    # ------------------- [여기에 새로운 옵션 추가] -------------------
+    options.add_argument('--disable-gpu') # 가상 서버 환경 안정화
+    options.add_argument('--window-size=1920,1080') # 화면 크기를 고정하여 렌더링 오류 방지
+    options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36') # 일반 접속자로 위장(봇 탐지 우회)
+    options.page_load_strategy = 'eager' # 모든 이미지가 뜨지 않아도 글자만 로딩되면 즉시 다음 단계 진행
+    
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver.set_page_load_timeout(30) # 30초 이상 로딩이 멈추면 강제로 연결을 끊고 재시도 방지
+    # -------------------------------------------------------------------
     
     try:
         url = 'https://www.megabox.co.kr/event'
