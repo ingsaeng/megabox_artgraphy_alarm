@@ -1,5 +1,0 @@
-Plaintext
-
-selenium
-requests
-webdriver-manager
